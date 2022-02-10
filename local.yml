@@ -17,6 +17,19 @@ services:
 #    env_file:
 #      - ./.envs/.local/.django
 #      - ./.envs/.local/.postgres
+    environment:
+      - USE_DOCKER=yes
+      - IPYTHONDIR=/app/.ipython
+      - DJANGO_ACCOUNT_ALLOW_REGISTRATION=False
+      - DJANGO_ACCOUNT_EMAIL_VERIFICATION=none
+      - DJANGO_ALLOWED_HOSTS=["data.red.lan","localhost","127.0.0.1"]
+      - ALLOWED_HOSTS=["data.red.lan","localhost","127.0.0.1"]
+      - QCLUSTER_NAME=soar
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
+      - POSTGRES_DB=ghostwriter
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
     ports:
       - "8008:8000"
     command: /start
@@ -29,6 +42,12 @@ services:
     volumes:
       - local_postgres_data:/var/lib/postgresql/data
       - local_postgres_data_backups:/backups
+    environment:
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
+      - POSTGRES_DB=ghostwriter
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
     #env_file:
     #  - ./.envs/.local/.postgres
 
